@@ -1,4 +1,4 @@
-class Enclave:
+class Autoclave:
     def __init__(self, temp, open, close, presion, humedad):
         self.temperature = temp
         self.open = open
@@ -26,3 +26,17 @@ class Enclave:
 
     def sethumidity(self,hum):
         self.humidity = hum
+        
+    def getTemp(self):
+        return self.temperature
+
+    def getPressure(self):
+        return self.pressure
+
+    def getHumidity(self):
+        return self.humidity
+    
+    def getEstado(self):
+        if self.open==1:
+            return "Abierto"
+        else: return "Cerrado"        
