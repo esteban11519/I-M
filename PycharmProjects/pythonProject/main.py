@@ -11,9 +11,18 @@ class window(QMainWindow):
     def __init__(self):
         # Variables de ajuste
         t_printData=1000  #Periodo de recolección de datos en milisegundos
+        tLeerSerial=500
         self.Temp_maxima=100 # Temperatura máxima en grados centígrados
         self.Pressure_maxima=5 # Presión máxima en atm
         self.guardarDatos="memoria.txt" # Nombre del archivo en el que se va a guardar el registro
+        
+        try:    
+            self.puerto = Serial("COM5", 9600,timeout=0.5) #Serial del arduino.
+        except:
+            print("error")
+            
+        self.lecturaSerial=0 
+        
         # Inicio del código
         # Se configuran las dimensiones de la pantalla principal
         super(window,self).__init__()
@@ -56,7 +65,7 @@ class window(QMainWindow):
             # CreacionBoton2 Permite capturar la información de la temperatura. 
         self.b3 = QtWidgets.QPushButton(self)
         self.b3.setText("Ok.")
-        self.b3.clicked.connect(self.cambioTemp)
+        #self.b3.clicked.connect(self.cambioTemp)
         self.b3.setGeometry(60,230,60,20)
         # CreacionBoton4 para reiniciar el registro de información
         self.b4 = QtWidgets.QPushButton(self)
@@ -208,6 +217,16 @@ class window(QMainWindow):
         self.timer2 = QTimer()
         self.timer2.timeout.connect(self.printData)
         self.timer2.start(t_printData)
+        
+        # Se lee el Serial proveniente de Arduino
+        self.timer3 = QTimer()
+        self.timer3.timeout.connect(self.serialArduino)
+        self.timer3.timeout.connect(self.cambioTemp)
+        self.timer3.start(tLeerSerial)
+        
+        
+           
+       
 
         
         # Se verifica si la alarma de la presión se activa
@@ -249,10 +268,10 @@ class window(QMainWindow):
         ", Presi"+str(chr(243))+"n " + str(chr(62))+"= " + str(self.Pressure_maxima) + preMax + "\n"
        
         self.escritura(data)
-        print(data)
+        print(data)      
         self.update()
     
-       #Realiza la escritura en .txt
+       
     def escritura(self,data):
         try:
             archivo= open(self.guardarDatos, "a" )
@@ -287,8 +306,9 @@ class window(QMainWindow):
         
         # Se cambia de temperatura.
     def cambioTemp(self):
-        input = self.tb1.text()
-        input2 = float(input)
+        #input = self.tb1.text()
+        #input2 = float(input)
+        input2=self.lecturaSerial
         self.BCD.display(input2)
         self.AutoclaveBog.setTemp(input2)
         self.pb.setValue((input2/150)*100)
@@ -307,15 +327,22 @@ class window(QMainWindow):
             self.l2.setPixmap(self.pixmap2)
         self.AutoclaveBog.abrir()
         self.update()
+        
+    def serialArduino(self):
+        try:
+            lectura=str(self.puerto.readline())
+            self.lecturaSerial=round(int(lectura[2:(len(lectura)-5)])*150/1023,2)
+        except:
+            self.lecturaSerial=123.123
+        print(self.lecturaSerial)
+        self.update()
 
 
 if __name__ == '__main__':
-    puerto = Serial("COM5", 9600)
     app = QApplication(sys.argv)
     wind = window()
     wind.show()
     sys.exit(app.exec()) # Se utliza para mantenerse en un ciclo infinito, siento sensible a los eventos.
-    while (True):
-        if (puerto.readable()):
-            print(puerto.readline())
+    self.puerto.close()
+            
     
