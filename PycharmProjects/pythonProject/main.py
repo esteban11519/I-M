@@ -1,6 +1,6 @@
 # This is a sample Python script.
 import Autoclave
-from PyQt5 import QtWidgets , QtGui
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
@@ -8,28 +8,23 @@ from datetime import datetime
 
 class window(QMainWindow):
     def __init__(self):
-        
-        
         # Variables de ajuste
         t_printData=1000  #Periodo de recolección de datos en milisegundos
         self.Temp_maxima=100 # Temperatura máxima en grados centígrados
         self.Pressure_maxima=5 # Presión máxima en atm
         self.guardarDatos="memoria.txt" # Nombre del archivo en el que se va a guardar el registro
         # Inicio del código
-        
         # Se configuran las dimensiones de la pantalla principal
         super(window,self).__init__()
         self.setGeometry(200,200,700,700)
         self.setWindowTitle("Autoclave")
         #Objeto Autoclave es instanceado
         self.AutoclaveBog = Autoclave.Autoclave(16, 0, 1, 0.74, 0.46)
-
         # CreacionBoton1 para abrir
         self.b1 = QtWidgets.QPushButton(self)
         self.b1.setText("Abrir")
         self.b1.clicked.connect(self.abrirEnc)
         self.b1.move(40,85)
-
         #Creacion Imagen AutoClave
         self.l2 = QtWidgets.QLabel(self)
         self.pixmap1 = QtGui.QPixmap("AutoClaveCerrado.png")
@@ -37,39 +32,31 @@ class window(QMainWindow):
         self.l2.setGeometry(180, 150, 500, 400)
         self.l2.setPixmap(self.pixmap1)
         self.l2.setAlignment(Qt.AlignCenter)
-
         # CreacionBoton2 para cerrar el autoclave
         self.b2 = QtWidgets.QPushButton(self)
         self.b2.setText("Cerrar")
         self.b2.clicked.connect(self.cerrarEnc)
         self.b2.move(40, 125)
-
         # CreacionLabel para la puerta
         self.l1 = QtWidgets.QLabel(self)
         self.l1.setText("Puerta:")
         self.l1.setAlignment(Qt.AlignLeft)
         self.l1.setFont(QtGui.QFont('SansSerif',12))
         self.l1.move(20,50)
-
         # CreacionLabel para la temperatura
         self.l3 = QtWidgets.QLabel(self)
         self.l3.setText("Temperatura:")
         self.l3.setAlignment(Qt.AlignLeft)
         self.l3.setFont(QtGui.QFont('SansSerif', 12))
         self.l3.setGeometry(20,180,110,100)
-
             #CreacionTextBoxTemp que permite captar la información deseada.
         self.tb1 = QtWidgets.QLineEdit(self)
         self.tb1.setGeometry(90,208,50,20)
-
             # CreacionBoton2 Permite capturar la información de la temperatura. 
         self.b3 = QtWidgets.QPushButton(self)
         self.b3.setText("Ok.")
         self.b3.clicked.connect(self.cambioTemp)
         self.b3.setGeometry(60,230,60,20)
-        
-        
-        
         # CreacionBoton4 para reiniciar el registro de información
         self.b4 = QtWidgets.QPushButton(self)
         self.b4.setText("Reiniciar registro")

@@ -1,7 +1,5 @@
-2021/3/28 7:21:36, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:37, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:38, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:39, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:40, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:41, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
-2021/3/28 7:21:42, Estado: Abierto, Temperatura: 120.0癈, Presi髇: 6.0 Atm , Humedad: 0.5 %, Temperatura >= 100 :Si, Presi髇 >= 5 :Si
+2021/4/3 15:32:43, Estado: Cerrado, Temperatura: 16掳C, Presi贸n: 0.74 Atm , Humedad: 0.46 %, Temperatura >= 100 :No, Presi贸n >= 5 :No
+2021/4/3 15:32:44, Estado: Cerrado, Temperatura: 16掳C, Presi贸n: 0.74 Atm , Humedad: 0.46 %, Temperatura >= 100 :No, Presi贸n >= 5 :No
+2021/4/3 15:32:45, Estado: Cerrado, Temperatura: 16掳C, Presi贸n: 0.74 Atm , Humedad: 0.46 %, Temperatura >= 100 :No, Presi贸n >= 5 :No
+2021/4/3 15:32:46, Estado: Cerrado, Temperatura: 16掳C, Presi贸n: 0.74 Atm , Humedad: 0.46 %, Temperatura >= 100 :No, Presi贸n >= 5 :No
+2021/4/3 15:32:47, Estado: Cerrado, Temperatura: 16掳C, Presi贸n: 0.74 Atm , Humedad: 0.46 %, Temperatura >= 100 :No, Presi贸n >= 5 :No
