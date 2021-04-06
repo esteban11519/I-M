@@ -1,4 +1,5 @@
 # This is a sample Python script.
+from serial import Serial
 import Autoclave
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QTimer
@@ -309,9 +310,12 @@ class window(QMainWindow):
 
 
 if __name__ == '__main__':
+    puerto = Serial("COM5", 9600)
     app = QApplication(sys.argv)
     wind = window()
     wind.show()
     sys.exit(app.exec()) # Se utliza para mantenerse en un ciclo infinito, siento sensible a los eventos.
-    
+    while (True):
+        if (puerto.readable()):
+            print(puerto.readline())
     
