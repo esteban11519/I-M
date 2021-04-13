@@ -7,7 +7,7 @@ for i=1:num
     dosDR(i)=sum(dosD(i,:));
 end
 
-%%
+%% a 
 figure
 subplot(2,1,1);
 histogram(unD);
@@ -21,19 +21,19 @@ ylabel("Repeticiones");
 xlabel("Valor del lanzamiento");
 title("Histograma para dos dados, " + num + " lanzamientos" );
 grid on
-%% 
+%%  b
 figure
 subplot(2,1,1);
 plot(unD);
-ylabel("Cara del dado");
-xlabel("Cara del dado");
-title("Histograma para un dado, " + num + " lanzamientos" );
+ylabel("Valor de lanzamiento");
+xlabel("Lanzamiento");
+title("Secuencia temporal para un dado, " + num + " lanzamientos" );
 grid on
 subplot(2,1,2);
 plot(dosDR);
-ylabel("Repeticiones");
-xlabel("Cara del dado");
-title("Histograma para dos dados, " + num + " lanzamientos" );
+ylabel("Valor de lanzamiento");
+xlabel("Lanzamiento");
+title("Secuencia temporal para dos dados, " + num + " lanzamientos" );
 grid on
 
 
