@@ -24,29 +24,36 @@ clear whichFig repe
 %% 4. 
 clc
 close
-repe=[10 20 30 50 100 1000];
-selectFig=[1 0 0];
+repe=[10 20 30 50 100 1000];%repe is the vector with repetitions per experiment
+selectFig=[1 0 0]; %selects which figures you want [histogram temporalSec unitDelay];
 for i=1:length(repe)
     dataNow=dataAudacity(1:repe(i));
     showAuda(dataNow, repe(i), selectFig, fs);
 end
 
 clear repe slectFig
+%% 5. 
+clc
+close
+selectFig=[1 0 0]; 
+showMoney(mon2SellData, 30, selectFig,2);
+showMoney(mon3SellData, 30, selectFig,3);
+
+mon2SellDataMil=randi([0 2], 2, 1000);
+mon3SellDataMil=randi([0 3], 3, 1000);
+
+showMoney(mon2SellDataMil, 1000, selectFig,2);
+showMoney(mon3SellDataMil, 1000, selectFig,3);
+
+clear selectFig 
 %% Para calcular número de clases se puede usar esta aproximación 
 % en la función showAuda se aplica esta fórmula
 %n= número de muestras 
 %k aprox= 1+ 3.3 log( n ) 
 %clases = intervalo / k 
 
-%% histograma ejemplo de clase 
-vector=[ 11.5 13.2 11.2 14.3 14.2 14.5 12.2 12.4 11.2 12.5 10.2 13.4 12.3 9.3 15.2 8.2 11.5 8.5 12.5 9.1 10 10.4 10.5 12.4 10.3 14 15.3 11.3 14.4 14.3 13 11.3 14.2 9 14.3 13 11.5 12.2 13 12.1 11.1 14.4 15.5 10 10 12.4 13.5 9.1 15.3 9.2];
-k=1+3.33 * log(50);
-mInt= max(vector)-min(vector)/fix(k);
-histogram(vector, fix(k));
-
 %% Functions
 function v=rollDices(number, faces, rep)
-    %% 1 Dices
     vini=randi(faces, number, rep);
     v=1:rep;
     for i=1:rep 
@@ -59,13 +66,15 @@ function showEm(uno, dos, num, boole)
     if (boole(1))
         figure
         subplot(2,1,1);
-        histogram(uno);
+        C=categorical(uno);
+        histogram(C);
         ylabel("Repeticiones");
         xlabel("Valor del lanzamiento");
         title("Histograma para un dado, " + num + " lanzamientos" );
         grid on
         subplot(2,1,2);
-        histogram(dos);
+        C=categorical(dos);
+        histogram(C);
         ylabel("Repeticiones");
         xlabel("Valor del lanzamiento");
         title("Histograma para dos dados, " + num + " lanzamientos" );
@@ -121,7 +130,9 @@ function showAuda(data, num, boole, freq)
     %% Temporal sequence 
     if(boole(2))
         figure
-        plot(data, 'o');
+        time=1:length(data);
+        time=time.*1/freq;
+        plot(time, data, 'o');
         ylabel("Valor de la señal");
         xlabel("Tiempo (S)");
         title("Secuencia temporal para el audio, " + num + " muestras" );
@@ -134,6 +145,37 @@ function showAuda(data, num, boole, freq)
         ylabel("Valor de señal tiempo actual");
         xlabel("Valor de señal tiempo anterior");
         title("Diagrama de retardo unitario para señal de audio, " + num + " muestras" );
+        
+    end
+end
+
+function showMoney(data, num, boole, cuantas)
+    %% Histograms
+    if (boole(1))
+        figure
+        C=categorical(data);
+        histogram(C);
+        ylabel("Repeticiones en experimento");
+        xlabel("Número de sellos en lanzamiento");
+        title("Histograma para "+cuantas+" monedas, " + num + " lanzamientos" );
+        grid on
+    end
+    %% Temporal sequence 
+    if(boole(2))
+        figure
+        plot(data, 'o');
+        ylabel("Número de sellos en lanzamiento");
+        xlabel("Número de repetición");
+        title("Secuencia temporal para "+cuantas+" monedas, " + num + " muestras" );
+    end
+    %% Retardo unitario
+    if(boole(3))
+        figure
+        datam=[data(2:num) data(1)];
+        plot(datam, data, 'o');
+        xlabel("Cantidad de sellos repetición anterior");
+        ylabel("Cantidad de sellos repetición actual");
+        title("Diagrama de retardo unitario experimento con " +cuantas+" monedas, " + num + " muestras" );
         
     end
 end
