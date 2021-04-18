@@ -36,14 +36,15 @@ clear repe slectFig
 clc
 close
 selectFig=[1 0 0]; 
+repe=1000;
 showMoney(mon2SellData, 30, selectFig,2);
 showMoney(mon3SellData, 30, selectFig,3);
 
-mon2SellDataMil=randi([0 2], 2, 1000);
-mon3SellDataMil=randi([0 3], 3, 1000);
+mon2SellDataMil=rollDices(2, [0 1], repe);
+mon3SellDataMil=rollDices(3, [0 1], repe);
 
-showMoney(mon2SellDataMil, 1000, selectFig,2);
-showMoney(mon3SellDataMil, 1000, selectFig,3);
+showMoney(mon2SellDataMil, repe, selectFig,2);
+showMoney(mon3SellDataMil, repe, selectFig,3);
 
 clear selectFig 
 %% Para calcular número de clases se puede usar esta aproximación 
